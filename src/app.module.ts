@@ -9,19 +9,9 @@ import { MessageController } from './controllers/message.controller';
 import { MessageService } from './services/message.service';
 import { RoomsController } from './controllers/room.controller';
 import { RoomsService } from './services/room.service';
-import { CorsMiddleware } from './middleware/cors';
 @Module({
   imports: [],
   controllers: [AppController, LoginController, MessageController, RoomsController],
   providers: [AppService, loginService, AppGateway, MessageService, RoomsService],
 })
-export class AppModule implements NestModule {
-
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(Authentication)
-      .forRoutes('users/user')
-      .apply(CorsMiddleware)
-      .forRoutes('*')
-  }
-}
+export class AppModule { }
