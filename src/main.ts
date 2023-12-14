@@ -9,14 +9,7 @@ async function bootstrap() {
   app.enableCors({
     origin: "*"
   })
-  const httpServer = app.getHttpServer();
-  const io = new socketio.Server(httpServer, {
-    cors: {
-      origin: "*",
-    }
-  });
 
-  app.useWebSocketAdapter(new IoAdapter(app));
 
   await app.listen(3000);
 }
