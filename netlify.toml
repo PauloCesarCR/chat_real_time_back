@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"  # ou o comando necessário para construir seu projeto
+  functions = "dist/functions"
+
+[dev]
+  functionsPort = 9000
