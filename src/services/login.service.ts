@@ -9,12 +9,12 @@ export class loginService {
 
     constructor() {
         this.prisma = new PrismaClient()
-        this.prisma.$connect()
     }
 
 
     async login(email: string, password: string) {
 
+        this.prisma.$connect()
         try {
             if (!email || !password) {
                 throw new Error("Todos os campos são obrigatórios")
@@ -35,7 +35,7 @@ export class loginService {
             const tk = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_TOKEN, {
                 expiresIn: "3h",
             });
-
+            this.prisma.$disconnect()
             return { id: user.id, name: user.name, email: user.email, token: tk };
         } catch (error) {
             throw new Error(error);

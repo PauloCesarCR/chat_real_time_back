@@ -8,12 +8,12 @@ export class MessageService {
 
     constructor() {
         this.prisma = new PrismaClient()
-        this.prisma.$connect()
     }
 
 
     async newMessage(message: Message) {
 
+        this.prisma.$connect()
         try {
             const messages = await this.prisma.messages.create({
                 data: {
@@ -23,7 +23,7 @@ export class MessageService {
                     room_id: message.room_id
                 }
             })
-
+            this.prisma.$disconnect()
             return messages;
 
         } catch (error) {

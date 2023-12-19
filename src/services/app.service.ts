@@ -11,11 +11,11 @@ export class AppService {
 
   constructor() {
     this.prisma = new PrismaClient()
-    this.prisma.$connect()
   }
 
   async newUser(user: User): Promise<User | Error> {
 
+    this.prisma.$connect()
     try {
       const userS = await this.prisma.users.create({
         data: {
@@ -24,6 +24,7 @@ export class AppService {
           password: await bcrypt.hash(user.password, 10),
         }
       })
+      this.prisma.$disconnect()
       return userS;
 
     } catch (e) {

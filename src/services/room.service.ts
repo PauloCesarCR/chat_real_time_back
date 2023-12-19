@@ -7,12 +7,15 @@ export class RoomsService {
 
     constructor() {
         this.prisma = new PrismaClient()
-        this.prisma.$connect()
     }
 
 
     async getRooms() {
+
+        this.prisma.$connect()
         const rooms = await this.prisma.rooms.findMany();
+
+        this.prisma.$disconnect()
         return rooms;
     }
 
